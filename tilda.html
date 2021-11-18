@@ -1,7 +1,6 @@
-<style type="text/css">
+<style>
     .container {
         width: 954px;
-        margin: auto;
     }
 
     .slider {
@@ -161,6 +160,16 @@
 
 
     <div class="dots--frame">
+        <span class="slider-dots_item" id="slide__0"></span>
+        <span class="slider-dots_item" id="slide__1"></span>
+        <span class="slider-dots_item" id="slide__2"></span>
+        <span class="slider-dots_item" id="slide__3"></span>
+        <span class="slider-dots_item" id="slide__4"></span>
+        <span class="slider-dots_item" id="slide__5"></span>
+        <span class="slider-dots_item" id="slide__6"></span>
+        <span class="slider-dots_item" id="slide__7"></span>
+        <span class="slider-dots_item" id="slide__8"></span>
+        <span class="slider-dots_item" id="slide__9"></span>
     </div>
 </div>
 
@@ -170,6 +179,7 @@
         sliderFrame = document.querySelector(".slider__frame"),
         sliderTrack = document.querySelector(".slider__track"),
         dotsFrame = document.querySelector(".dots--frame"),
+        dots = document.querySelectorAll(".slider-dots_item"),
         frameWidth = sliderFrame.offsetWidth + 100,
         slideIndex = 0,
         posInit = 0,
@@ -186,8 +196,7 @@
         prevTrf = 0,
         lastTrf = --slides.length * frameWidth,
         posThreshold = slides[0].offsetWidth * 0.35,
-        trfRegExp = /([-0-9.]+(?=px))/,
-        dots = createDot(dotsFrame, slides.length)
+        trfRegExp = /([-0-9.]+(?=px))/;
 
     function getEvent() {
         return (event.type.search('touch') !== -1) ? event.touches[0] : event;
@@ -197,6 +206,7 @@
         if (transition) {
             sliderTrack.style.transition = 'transform .5s';
         }
+
         sliderTrack.style.transform = `translate3d(-${slideIndex * frameWidth}px, 0px, 0px)`;
     }
 
@@ -332,13 +342,6 @@
         allowSwipe = true;
     }
 
-    function createDot(dotsFrame, num) {
-        for (let i = 0; i < num; ++i) {
-            dotsFrame.innerHTML += `\n <span class="slider-dots_item" id="slide__${i}"></span>`
-        }
-        return document.querySelectorAll(".slider-dots_item")
-    }
-
 
     sliderTrack.style.transform = 'translate3d(0px, 0px, 0px)';
     sliderFrame.classList.add('grab');
@@ -349,14 +352,13 @@
 
 
     dotsFrame.addEventListener('click', event => {
-        let target = event.target
+        let target = event.target;
 
         if (target.tagName.toLowerCase() === "span") {
-            target.classList.add("dots__current")
-            dots[slideIndex].classList.remove("dots__current")
-            slideIndex = target.id.match(/\d/)
+            target.classList.add("dots__current");
+            dots[slideIndex].classList.remove("dots__current");
+            slideIndex = target.id.match(/\d/);
         }
         slide();
     });
-
 </script>
